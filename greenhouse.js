@@ -33,7 +33,7 @@ ddp.connect(function(err){
         var splitTemp = tempFile.split('t=');
         if(splitTemp.length > 1){
           var currentTemp = splitTemp[1];
-          sensorValues.push({sensor: allSensors[i], value: currentTemp});
+          sensorValues.push({sensorID: allSensors[i], value: currentTemp});
         }
         console.log('Temp is', splitTemp[1]);
       }
