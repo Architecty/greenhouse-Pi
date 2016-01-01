@@ -2,7 +2,8 @@ var fs = require('fs'),
     DDP = require('ddp'),
     moment = require('moment'),
     ddpLogin = require('ddp-login'),
-    config = require('./config.js');
+    config = require('./config.js'),
+    os = require('os');
 
 var ddp = new DDP({
   host: config.ddpHost,
@@ -23,6 +24,19 @@ ddp.connect(function(err){
   }, function(err, userInfo){
     if(err) throw err;
 
+    //Since our IP address may shift, check with each push and let the server know. Slightly simpler than setting this up to email changes.
+    var ifaces = os.networkInterfaces();
+    var currentIP = "";
+    for (var dev in ifaces) {
+
+      // ... and find the one that matches the criteria
+      var iface = ifaces[dev].filter(function(details) {
+        return details.family === 'IPv4' && details.internal === false;
+      });
+
+      if(iface.length > 0) currentIP = iface[0].address;
+    }
+
     var allSensors = fs.readdirSync('/sys/bus/w1/devices');
     var sensorValues = [];
 
@@ -33,7 +47,7 @@ ddp.connect(function(err){
         var splitTemp = tempFile.split('t=');
         if(splitTemp.length > 1){
           var currentTemp = splitTemp[1];
-          sensorValues.push({sensorID: allSensors[i], value: currentTemp});
+          sensorValues.push({sensorID: allSensors[i], value: currentTemp, currentIP: currentIP});
         }
         console.log('Temp is', splitTemp[1]);
       }
