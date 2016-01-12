@@ -47,7 +47,12 @@ ddp.connect(function(err){
         var splitTemp = tempFile.split('t=');
         if(splitTemp.length > 1){
           var currentTemp = splitTemp[1];
-          sensorValues.push({sensorID: allSensors[i], value: currentTemp, currentIP: currentIP});
+          sensorValues.push({
+            sensorID: allSensors[i],
+            value: currentTemp,
+            currentIP: currentIP,
+            sensorType:"temp"
+          });
         }
         console.log('Temp is', splitTemp[1]);
       }
