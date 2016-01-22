@@ -15,9 +15,9 @@ ddp.connect(function(err){
   if(err) throw err;
   ddpLogin(ddp, {
     env: "METEOR_TOKEN",
-    method: "account",
-    account: config.ddpEmail,
-    pass: config.ddpPassword,
+    method: "username",
+    account: config.key,
+    pass: config.secret,
     retry: 5,
     plaintext: false
   }, function(err, userInfo){
