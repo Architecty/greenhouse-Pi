@@ -24,7 +24,7 @@ ddp.connect(function(err){
   }, function(err, userInfo){
     if(err) throw err;
 
-    setInterval(getAndReportSensors(), 60 * 1000);
+    getAndReportSensors();
 
   })
 })
