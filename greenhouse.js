@@ -78,5 +78,5 @@ var getAndReportSensors = function(){
       }
     }
   )
-  setTimeout(getAndReportSensors(), 6 * 1000);
+  setTimeout(function(){getAndReportSensors()}, 6 * 1000);
 }
