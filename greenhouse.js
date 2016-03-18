@@ -13,7 +13,6 @@ var ddp = new DDP({
 
 ddp.connect(function(err){
 
-console.log(config);
   if(err) throw err;
   ddpLogin(ddp, {
     env: "METEOR_TOKEN",
