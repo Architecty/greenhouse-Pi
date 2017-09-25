@@ -13,7 +13,7 @@ There are a few steps you need to make to get your raspberry pi to send data to 
 2. Clone this repository onto your raspberry pi. 
 3. Install [Node](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server) and [forever](https://www.npmjs.com/package/forever). 
 4. Run `npm install` from the repository directory to install the needed packages from package.json. 
-5. Setup Cron to automatically restart forever, by typing `crontab -e`, and adding the following line: `@reboot /usr/local/bin/forever start -c /usr/local/bin/node --uid "greenhouse" -a /path/to/repository/greenhouse.js
+5. Setup Cron to automatically restart forever, by typing `crontab -e`, and adding the following line: `@reboot /usr/local/bin/forever start -c /usr/local/bin/node --uid "greenhouse" -a /path/to/repository/greenhouse.js`
 6. (Optional) Setup Cron to automatically pull and apply updates from this repository each day, by typing `crontab-e`, and adding the following line `01 01 * * * "cd /path/to/repository && git pull && forever restart greenhouse"`.
 7. Download the config file from the greenouse-meteor app controller setup, and copy its contents into a `config.js` file in the repository folder.
 8. Reboot the raspberry pi
